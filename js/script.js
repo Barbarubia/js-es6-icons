@@ -31,7 +31,8 @@ const eleContainer = document.querySelector('.container');
 
 // Creo un div che contiene l'icona e uno span con il nome
 for (let index in arrIcons) {
-let eleDiv = document.createElement('div');
+let eleIconBox = document.createElement('div');
+eleIconBox.classList.add('icon-box');
 
 let iconFamily = arrIcons[index].family;
 let iconPrefix = arrIcons[index].prefix;
@@ -43,6 +44,6 @@ if (iconFamily == 'fas') {
     iconFamily = 'fa-regular';
 }
 
-eleDiv.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}"></i><br><span>${iconName}</span>`;
-eleContainer.append(eleDiv);
+eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}"></i><span>${iconName}</span>`;
+eleContainer.append(eleIconBox);
 }
