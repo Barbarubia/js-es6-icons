@@ -1,0 +1,42 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #dddddd;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+header {
+    padding: 1rem 2rem 0 2rem;
+    background-color: white;
+    font-family: 'Acme', sans-serif;
+    color: #29b1dd;
+    font-size: 2rem;
+}
+
+
+
+/* NAV */
+nav {
+    padding: 1rem;
+    text-align: center;
+    background-color: #29b1dd;
+}
+
+nav label {
+    text-transform: uppercase;
+    color: white;
+}
+
+nav select option {
+    background-color: #b5e7f1;
+}
+
+
+
+/* MAIN */
