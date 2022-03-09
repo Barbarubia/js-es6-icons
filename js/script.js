@@ -52,7 +52,7 @@ function showIcons(icons) {
             iconFamily = 'fa-regular';
         }
 
-        eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconColor}"></i><span>${iconName}</span>`;
+        eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${RandomColorGenerator()}"></i><span>${iconName}</span>`;
         eleContainer.append(eleIconBox);
     })
 }
@@ -96,4 +96,27 @@ let eleIconType = document.createElement('option');
 eleIconType.value = arrIconTypes[index];
 eleIconType.innerHTML = arrIconTypes[index];
 iconsTypeSelector.append(eleIconType);
+}
+
+
+
+// Bonus 1
+// Funzione che genera un colore casuale in formato esadecimale
+function RandomColorGenerator() {
+
+    // array dei valori esadecimali
+    const arrHexValues = [0, 1, 2 , 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
+
+    function randomIndexGenerator() {
+        // Math.floor(Math.random() * (max - min + 1) + min);
+        return Math.floor(Math.random() * 16);
+    }
+
+    let HexColor = '#';
+
+    for (let HexValue = 1; HexValue <= 6; HexValue++) {
+        HexColor += arrHexValues[randomIndexGenerator()];
+    }
+    console.log(HexColor);
+    return HexColor;
 }
