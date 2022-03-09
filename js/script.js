@@ -29,15 +29,18 @@ Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno sti
 // Definizione variabili
 const eleContainer = document.querySelector('.container');
 
-// Creo un div che contiene l'icona e uno span con il nome
+// Esecuzione della funzione che crea un div per ciascuna icona che contiene l'icona stessa e uno span con il nome
 showIcons(arrIcons);
 
-function showIcons(icons) {
+// Definizione della funzione che crea i div per le icone
+function showIcons(array) {
 
+    // Ripulisco il contenitore ad ogni interazione. Essenziale per rigenerare la griglia quando applico il filtro.
     eleContainer.innerHTML = '';
 
-    icons.forEach((element) => {
-
+    //Per ogni elemento dell'array impostato come argomento della funzione (nel ns caso sara arrIcons) 
+    array.forEach((element) => {
+        // creo l'elemento div, gli attribuisco una classe e genero il contenuto
         let eleIconBox = document.createElement('div');
         eleIconBox.classList.add('icon-box');
 
@@ -52,57 +55,76 @@ function showIcons(icons) {
             iconFamily = 'fa-regular';
         }
 
-        eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${RandomColorGenerator()}"></i><span>${iconName}</span>`;
+        // Versione con colore statico preso dall'array
+        //  eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconColor}"></i><span>${iconName}</span>`;
+
+        // Versione con colore generato dinamicamente
+        eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${randomColorGenerator()}"></i><span>${iconName}</span>`;
+
+        // Infine lo appendo al contenitore
         eleContainer.append(eleIconBox);
     })
 }
 
 
 
-const iconsTypeSelector = document.getElementById('icon-type-selector');
+// Filtraggio delle icone per tipologia
 
-iconsTypeSelector.addEventListener('change', function () {
+// Definizione dell'elemento che contiene la selezione delle varie tipologie di icone
+const eleIconsTypeSelector = document.getElementById('icon-type-selector');
 
+// Applicazione di un evento (funzione che filtra le icone visualizzate) quando si cambia l'opzione del selettore
+eleIconsTypeSelector.addEventListener('change', function () {
+
+    // lettura del valore selezionato
     const iconsTypeSelected = this.value;
     
-    
+    // Se il valore selezionato è diverso da "all"
     if (iconsTypeSelected != 'all') {
-        
+        // creo una variabile che legge le icone filtrate
         const filteredIcons = arrIcons.filter((iconArgument) => {
+        // filtraggio delle icone: ritorna true se la chiave type degli elementi dell'array coincide con il valore selezionato
         if (iconArgument.type == iconsTypeSelected) {
         return true;
         }
     });
-    console.log(filteredIcons);
+    //console.log(filteredIcons);
+    // Rielaboro le icone visualizzate mostrando soltanto quelle selezionate dal filtro
     showIcons(filteredIcons);
-
+    // altrimento rielaaboro la visualizzazione di tutte le icone
     } else {
     showIcons(arrIcons);
     };
-
 });
 
 
 // Bonus 2
+// Creo un array, inizialmente vuoto
 arrIconTypes = [];
+
+// Per ogni elemento estraggo il valore della chiave type e la pusho in un nuovo array, ma solo se non è già presente
 arrIcons.forEach((element) => {
     if(!arrIconTypes.includes(element.type))
     arrIconTypes.push(element.type);
 })
-console.log(arrIconTypes);
+// console.log(arrIconTypes);
 
+// Per ogni elemento inserito nel nuovo array
 for (let index in arrIconTypes) {
+// Creo un tag option figlio del tag select
 let eleIconType = document.createElement('option');
+// e gli attribuisco un value e un testo uguali alla chiave
 eleIconType.value = arrIconTypes[index];
 eleIconType.innerHTML = arrIconTypes[index];
-iconsTypeSelector.append(eleIconType);
+// infine li appendo all'elemento html
+eleIconsTypeSelector.append(eleIconType);
 }
 
 
 
 // Bonus 1
 // Funzione che genera un colore casuale in formato esadecimale
-function RandomColorGenerator() {
+function randomColorGenerator() {
 
     // array dei valori esadecimali
     const arrHexValues = [0, 1, 2 , 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
@@ -117,6 +139,6 @@ function RandomColorGenerator() {
     for (let HexValue = 1; HexValue <= 6; HexValue++) {
         HexColor += arrHexValues[randomIndexGenerator()];
     }
-    console.log(HexColor);
+    // console.log(HexColor);
     return HexColor;
 }
