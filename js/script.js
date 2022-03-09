@@ -81,3 +81,19 @@ iconsTypeSelector.addEventListener('change', function () {
     };
 
 });
+
+
+// Bonus 2
+arrIconTypes = [];
+arrIcons.forEach((element) => {
+    if(!arrIconTypes.includes(element.type))
+    arrIconTypes.push(element.type);
+})
+console.log(arrIconTypes);
+
+for (let index in arrIconTypes) {
+let eleIconType = document.createElement('option');
+eleIconType.value = arrIconTypes[index];
+eleIconType.innerHTML = arrIconTypes[index];
+iconsTypeSelector.append(eleIconType);
+}

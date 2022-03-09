@@ -67,3 +67,8 @@ nav select option {
 .container .icon-box i {
     font-size: 2rem;
 }
+
+.container .icon-box span {
+    font-size: .8rem;
+    font-weight: 600;
+}
