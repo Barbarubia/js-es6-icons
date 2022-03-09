@@ -37,6 +37,7 @@ eleIconBox.classList.add('icon-box');
 let iconFamily = arrIcons[index].family;
 let iconPrefix = arrIcons[index].prefix;
 let iconName = arrIcons[index].name;
+let iconColor = arrIcons[index].color;
 
 if (iconFamily == 'fas') {
     iconFamily = 'fa-solid';
@@ -44,6 +45,6 @@ if (iconFamily == 'fas') {
     iconFamily = 'fa-regular';
 }
 
-eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}"></i><span>${iconName}</span>`;
+eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconColor}"></i><span>${iconName}</span>`;
 eleContainer.append(eleIconBox);
 }
