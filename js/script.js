@@ -30,21 +30,54 @@ Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno sti
 const eleContainer = document.querySelector('.container');
 
 // Creo un div che contiene l'icona e uno span con il nome
-for (let index in arrIcons) {
-let eleIconBox = document.createElement('div');
-eleIconBox.classList.add('icon-box');
+showIcons(arrIcons);
 
-let iconFamily = arrIcons[index].family;
-let iconPrefix = arrIcons[index].prefix;
-let iconName = arrIcons[index].name;
-let iconColor = arrIcons[index].color;
+function showIcons(icons) {
 
-if (iconFamily == 'fas') {
-    iconFamily = 'fa-solid';
-} else if (iconFamily == 'far') {
-    iconFamily = 'fa-regular';
+    eleContainer.innerHTML = '';
+
+    icons.forEach((element) => {
+
+        let eleIconBox = document.createElement('div');
+        eleIconBox.classList.add('icon-box');
+
+        let iconFamily = element.family;
+        let iconPrefix = element.prefix;
+        let iconName = element.name;
+        let iconColor = element.color;
+
+        if (iconFamily == 'fas') {
+            iconFamily = 'fa-solid';
+        } else if (iconFamily == 'far') {
+            iconFamily = 'fa-regular';
+        }
+
+        eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconColor}"></i><span>${iconName}</span>`;
+        eleContainer.append(eleIconBox);
+    })
 }
 
-eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconColor}"></i><span>${iconName}</span>`;
-eleContainer.append(eleIconBox);
-}
+
+
+const iconsTypeSelector = document.getElementById('icon-type-selector');
+
+iconsTypeSelector.addEventListener('change', function () {
+
+    const iconsTypeSelected = this.value;
+    
+    
+    if (iconsTypeSelected != 'all') {
+        
+        const filteredIcons = arrIcons.filter((iconArgument) => {
+        if (iconArgument.type == iconsTypeSelected) {
+        return true;
+        }
+    });
+    console.log(filteredIcons);
+    showIcons(filteredIcons);
+
+    } else {
+    showIcons(arrIcons);
+    };
+
+});
