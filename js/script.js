@@ -38,16 +38,22 @@ function showIcons(array) {
     // Ripulisco il contenitore ad ogni interazione. Essenziale per rigenerare la griglia quando applico il filtro.
     eleContainer.innerHTML = '';
 
+    
     //Per ogni elemento dell'array impostato come argomento della funzione (nel ns caso sara arrIcons) 
     array.forEach((element) => {
         // creo l'elemento div, gli attribuisco una classe e genero il contenuto
         let eleIconBox = document.createElement('div');
         eleIconBox.classList.add('icon-box');
-
+        
         let iconFamily = element.family;
         let iconPrefix = element.prefix;
         let iconName = element.name;
+
+        // Update Bonus 1: modifico la proprietà color anche nell'array oltre che visivamente
+        element.randomColor = randomColorGenerator();
+
         let iconColor = element.color;
+        let iconRandomColor = element.randomColor;
 
         if (iconFamily == 'fas') {
             iconFamily = 'fa-solid';
@@ -56,14 +62,15 @@ function showIcons(array) {
         }
 
         // Versione con colore statico preso dall'array
-        //  eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconColor}"></i><span>${iconName}</span>`;
-
-        // Versione con colore generato dinamicamente
-        eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${randomColorGenerator()}"></i><span>${iconName}</span>`;
+        // eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconColor}"></i><span>${iconName}</span>`;
+        
+        // Versione con colore generato randomicamente e incluso nell'array
+        eleIconBox.innerHTML = `<i class="${iconFamily} ${iconPrefix}${iconName}" style="color: ${iconRandomColor}"></i><span>${iconName}</span>`;
 
         // Infine lo appendo al contenitore
         eleContainer.append(eleIconBox);
     })
+    console.log(arrIcons);
 }
 
 
